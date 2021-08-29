@@ -18,10 +18,11 @@ def knapsack_problem_solver_by_recursive_algorithm(input_file):
 
     def total_value(i, max_weight):
 
-        weight_i = weight_and_value_list[i][0] 
-        value_i  = weight_and_value_list[i][1] 
+        if i <= nb_candidate_objects-1:
 
-        if i < nb_candidate_objects-1:
+            weight_i = weight_and_value_list[i][0] 
+            value_i  = weight_and_value_list[i][1] 
+
             if weight_i <= max_weight:
                 # select i+1 th object or not.
                 tval = max(value_i + total_value(i+1, max_weight - weight_i),
@@ -29,7 +30,7 @@ def knapsack_problem_solver_by_recursive_algorithm(input_file):
             else:
                 # not select i+1 th object.
                 tval = total_value(i+1, max_weight)
-        elif i == nb_candidate_objects-1:
+        elif i == nb_candidate_objects:
             # total value is zero if there are no more candidate objects.
             tval = 0
 
@@ -39,17 +40,11 @@ def knapsack_problem_solver_by_recursive_algorithm(input_file):
 
     print(tval)
 
-
 #    # Display solutions
 #    print('Solution and Total weight and Total value')
-#    sol_i = 1
-#    for csumw in candidate_solution_under_max_weight:
-#        print('No.'+ str(sol_i), csumw[1], csumw[0][0], csumw[0][1])
-#        sol_i += 1
 
 
 if __name__ == "__main__":
-
 
     input_file = sys.argv[1]
     knapsack_problem_solver_by_recursive_algorithm(input_file)
